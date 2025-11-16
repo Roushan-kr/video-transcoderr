@@ -1,0 +1,39 @@
+{
+  "MessageId": "ef485540-06c7-408f-a2ca-3fc26b2bd092",
+  "ReceiptHandle": "AQEBzv+aJCEqSfKdFFSt4oTRZZYeJDSRMy/obQE1eBe/xLWWePNn3tntC8RsEmobqFoULaQ5y4lHPILpDYojvR49Ho1T0OaSUWqnBLOTe4VbKpmVfELaDIUFZu6iiCL8ZbFSvvV7PTQWW0LRTjgyaetJPmWlNMZxAHyk41dYnNHQ8s5NVXbvqbTdNk+QIgveTc5qx0QCjReOxRhlNPMdxKbhj2X+yTLAnzT0OOveo3wjvbq1DoVDV7c7fUkyew0ea+mbZah+bte909SQoF6E+mRbmpYFVv+601POVsdmvV9Nolp74HbSzB3SBEtyM/jYdrex2/3BDPwg6/D1tmSxB1ou1NZEHo+JRRxkSIMJcP8NtuKatpgPsjVkPtJBRXZGR6sN3JYK5VipuoxxVOKCEhL+Tg==",
+  "MD5OfBody": "0aeacd793aeef32604f68c14f37be99f",
+  "Body": {
+    "Records": [
+      {
+        "eventVersion": "2.1",
+        "eventSource": "aws:s3",
+        "awsRegion": "ap-south-1",
+        "eventTime": "2025-10-27T16:04:55.369Z",
+        "eventName": "ObjectCreated:Put",
+        "userIdentity": { "principalId": "A3VGFJQFTA17IA" },
+        "requestParameters": { "sourceIPAddress": "122.176.179.77" },
+        "responseElements": {
+          "x-amz-request-id": "RGM11GX482MYXT9S",
+          "x-amz-id-2": "ezNwFb2dOUHwxIJCucwgXFU8sbcXFvORIWhuwmQH9r4Z2oVK943WsJSDyn1pCz92gUfC/qAs8d1kk6s4Pq9XO5Adl+RD8SmU"
+        },
+        "s3": {
+          "s3SchemaVersion": "1.0",
+          "configurationId": "rawVideoAddToSQS",
+          "bucket": {
+            "name": "fastapi-app-raw-videos",
+            "ownerIdentity": {
+              "principalId": "A3VGFJQFTA17IA"
+            },
+            "arn": "arn:aws:s3:::fastapi-app-raw-videos"
+          },
+          "object": {
+            "key": "videos/temp_video.mp4",
+            "size": 916623,
+            "eTag": "8531ee0e24f77acc7155305d7a383f48",
+            "sequencer": "0068FF98274CB343B5"
+          }
+        }
+      }
+    ]
+  }
+}

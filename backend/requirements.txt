@@ -1,0 +1,7 @@
+uvicorn
+fastapi
+boto3
+python-dotenv
+pydantic-settings
+sqlalchemy
+psycopg2-binary
