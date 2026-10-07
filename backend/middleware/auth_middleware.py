@@ -26,3 +26,14 @@ def get_current_user(
         raise HTTPException(401, "Access token cookie is missing")
     user_info = _get_user_from_cognito_access_token(access_token)
     return user_info
+
+
+def get_optional_current_user(
+    access_token: str = Cookie(None),
+) -> dict | None:
+    if not access_token:
+        return None
+    try:
+        return _get_user_from_cognito_access_token(access_token)
+    except Exception:
+        return None
