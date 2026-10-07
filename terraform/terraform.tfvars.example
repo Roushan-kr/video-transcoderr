@@ -1,0 +1,4 @@
+aws_region            = "us-east-1"
+environment           = "prod"
+raw_bucket_name       = "my-custom-video-transcoder-raw-2026"
+processed_bucket_name = "my-custom-video-transcoder-processed-2026"
