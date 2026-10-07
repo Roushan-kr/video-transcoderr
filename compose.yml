@@ -1,0 +1,55 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: video_transcoder_db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: transcoder_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d transcoder_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: video_transcoder_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:password123@db:5432/transcoder_db
+      - REGION_NAME=us-east-1
+      - RAW_S3_BUCKET_NAME=video-transcoder-raw-bucket
+      - PROCESSED_S3_BUCKET_NAME=video-transcoder-processed-bucket
+      - INTERNAL_API_SECRET=transcoder-internal-secret-token-123
+      - CLOUDFRONT_DOMAIN=
+    depends_on:
+      db:
+        condition: service_healthy
+
+  consumer:
+    build:
+      context: ./consumer
+      dockerfile: Dockerfile
+    container_name: video_transcoder_consumer
+    restart: unless-stopped
+    environment:
+      - REGION_NAME=us-east-1
+      - AWS_SQS_RAWVIDEO_QUEUE_URL=
+      - BACKEND_WEBHOOK_URL=http://backend:8000
+      - INTERNAL_API_SECRET=transcoder-internal-secret-token-123
+      - LOCAL_DISPATCH_MODE=true
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
